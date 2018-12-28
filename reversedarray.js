@@ -28,7 +28,83 @@ Assume that:
 In your solution, focus on correctness. The performance of your
 solution will not be the focus of the  assessment.
 */
+//FIRST SOLUTION
 
+function solution(A) {
+    // you can use console.log for debugging purposes, i.e.
+    // console.log('this is debug message');
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    if (A.length === 1) return 0;
+    var len = A.length,
+        result = 0;
+  
+    // how many pairs of coins we have now 
+    for(var i = 0; i < len - 1; i++) {
+      if (A[i] === A[i+1]) {
+        result++;
+      }
+    }
+    
+    var revers = 0;
+    for(var l = 0; l < len; l++) {
+      var count = 0;    
+      if (l > 0) {
+        count = (A[l-1] !== A[l]) ? count + 1 : count -1 ;
+      }			
+      if (l < len-1) {
+        count = (A[l] !== A[l+1]) ? count + 1 : count -1 ;
+      }
+      revers = Math.max(revers, count);
+    }
+    return result + revers;
+  }
+  console.log(solution([ 1, 1, 0, 1, 0, 0, 1, 1 ])); // 5
+  console.log(solution([ 1, 1, 1, 1, 1, 0, 1, 1 ])); // 7
+  console.log(solution([ 1, 0, 1])); // 2
+  console.log(solution([ 0, 1, 0])); // 2
+  console.log(solution([ 1, 1, 0, 0, 0])); // 3
+
+
+
+
+// ES 6
+
+function solution(A) {
+    // you can use console.log for debugging purposes, i.e.
+    // console.log('this is debug message');
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    if (A.length === 1) return 0;
+    const len = A.length;
+    let result = 0;
+  
+    // how many pairs of coins we have now 
+    for(let i = 0; i < len - 1; i++) {
+      if (A[i] === A[i+1]) {
+        result++;
+      }
+    }
+  
+    let revers = 0;
+    for(let l = 0; l < len; l++) {
+      let count = 0;    
+      if (l > 0) {
+        count = (A[l-1] !== A[l]) ? count + 1 : count -1 ;
+      }			
+      if (l < len-1) {
+        count = (A[l] !== A[l+1]) ? count + 1 : count -1 ;
+      }
+      revers = Math.max(revers, count);
+    }
+    return result + revers;
+  }
+  console.log(solution([ 1, 1, 0, 1, 0, 0, 1, 1 ])); // 5
+  console.log(solution([ 1, 1, 1, 1, 1, 0, 1, 1 ])); // 7
+  console.log(solution([ 1, 0, 1])); // 2
+  console.log(solution([ 0, 1, 0])); // 2
+  console.log(solution([ 1, 1, 0, 0, 0])); // 3
+
+
+  
 //SOLUTION with recursion
 
 const reverse = str => { str==="" ? str : reverse(str.substr(1)) + str[0] }
